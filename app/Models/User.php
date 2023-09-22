@@ -22,6 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +45,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
 }

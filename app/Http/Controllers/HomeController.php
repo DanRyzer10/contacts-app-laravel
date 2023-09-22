@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home',["contacts"=>auth()->user()->contacts]);
     }
+    //eliminar todos los elementos de una tabla con sql
+    //truncate table contacts;
+    
 }
