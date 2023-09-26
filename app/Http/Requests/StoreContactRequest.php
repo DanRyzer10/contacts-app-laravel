@@ -13,7 +13,7 @@ class StoreContactRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()?true:false;
     }
 
     /**
@@ -26,6 +26,7 @@ class StoreContactRequest extends FormRequest
         return [
             "name"=>"required",
             "phone_number"=>"required|starts_with:09",
+            "profile_picture"=>"image|nullable",
         ];
     }
 }

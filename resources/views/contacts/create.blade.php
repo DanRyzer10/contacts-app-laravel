@@ -8,7 +8,7 @@
                 <div class="card-header">ADD contact</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{route("contacts.store")}}">
+                    <form method="POST" action="{{route("contacts.store")}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">name</label>
@@ -30,6 +30,19 @@
                                 <input id="phone_number" type="tel" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" autocomplete="phone_number" value="{{ old('phone_number') }}">
                                 
                                 @error('phone_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="image" class="col-md-4 col-form-label text-md-end">profile picture</label>
+
+                            <div class="col-md-6">
+                                <input id="profile_picture" type="file" class="form-control @error('profile_picture') is-invalid @enderror" name="profile_picture" >
+                                @error('profile_picture')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

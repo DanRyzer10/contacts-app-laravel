@@ -46,7 +46,9 @@ class ContactPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user)
-    {   //
+    {  
+        return true;
+        //
     }
 
     /**

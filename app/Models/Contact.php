@@ -17,6 +17,7 @@ class Contact extends Model
         'name',
         'phone_number',
         'user_id',
+        'profile_picture'
     ];
 
     public function user(){

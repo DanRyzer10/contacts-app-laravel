@@ -15,7 +15,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = auth()->user()->contacts;
+        $contacts = auth()->user()->contacts()->orderBy("name","asc")->paginate(6);
         return view("contacts.index",compact("contacts"));
     }
 
@@ -39,11 +39,19 @@ class ContactController extends Controller
     public function store(StoreContactRequest $request)
     {
         $data=$request->validated();
+        if($request->hasFile("profile_picture")){
+            $path=$request->file('profile_picture')->store("profiles",'public');
+            $data['profile_picture']=$path;
+        }
+
+       
+       
         // $data['user_id'] = auth()->id();
         // Contact::create($data);
-        auth()->user()->contacts()->create($data);
+        $contact=auth()->user()->contacts()->create($data);
+        //session()->flash('alert',["message"=>"contact  $contact->name created successfully","type"=>"success"]);
         //Contact::create($request->all());
-        return redirect()->route("home");
+        return redirect()->route("home")->with("alert",["message"=>"contact  $contact->name created successfully","type"=>"success"]);
         //
     }
 
@@ -84,7 +92,7 @@ class ContactController extends Controller
     {
         $this->authorize("edit",$contact);
         $contact->update($request->validated());
-        return redirect()->route("home");
+        return redirect()->route("home")->with("alert",["message"=>"contact  $contact->name updated successfully","type"=>"success"]);
         //
     }
 
@@ -99,7 +107,7 @@ class ContactController extends Controller
         $this->authorize("delete",$contact);
 
         $contact->delete();
-        return redirect()->route("home");
+        return redirect()->route("home")->with("alert",["message"=>"contact  $contact->name deleted successfully","type"=>"success"]);
         
     }
 }

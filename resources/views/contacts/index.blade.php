@@ -6,7 +6,7 @@
         <div class="d-flex justify-content-between mb-3 bg-dark px-4 py-2 rounded">
             <div>
                <a href="{{route("contacts.show",$contact->id)}}">
-                 <img src="{{asset("img/hombre.png")}}" alt="user" width="40px"/>
+                 <img class="profile_picture" src="{{Storage::url($contact->profile_picture)}}" alt="user" width="40px"/>
                </a>
             </div>
 
@@ -25,5 +25,6 @@
         </div>
             
     @endforelse
+    {{$contacts->links()}}
 </div>
 @endsection
